@@ -1,10 +1,14 @@
 const User = require("../models/user")
 const util = require("util");
+const BaseClass= require("../middleware")
 
+module.exports = class AuthController extends BaseClass{
 
+	constructor() {
+        super()
+    }
 
-module.exports = {
-    async postlogin(req,res){
+	postlogin = async (req, res, next) => {
         const {username,password} = req.body;
         try{
             if(req.isAuthenticated()) throw "Please logout to continue"
@@ -17,18 +21,19 @@ module.exports = {
 
         }catch(error){
             console.log(error);
-            return res.status(400).send({success:false,msg:"Email or password is incorrect"});
+            return res.status(400).send({success:false,error});
         }
-    },
-    async getlogout(req,res){
+	}
 
+	getlogout = (req, res, next) => {
         if(req.isAuthenticated()){
             req.logout();
             return res.status(200).send({success:true,msg:"You are successfully logged out"})
         }
         throw "Please login to continue"
-    },
-    async postregister(req,res){
+	}
+
+    postregister = async (req,res)=>{
         try {
             if(req.isAuthenticated()) throw "Please logout to continue"
             const users = await User.register(new User(req.body), req.body.password);
@@ -42,4 +47,5 @@ module.exports = {
             return res.status(400).send({success:false,error});
         }
     }
+
 }

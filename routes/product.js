@@ -1,9 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const {errorHandler,isloggedin} = require("../middleware")
-const {buyProduct,findAllProduct,AddToCart,reduceByOne,
-      removeItem,AddMoney,cancelPurchase,AddToDatabase,
-      updateProduct,deleteProduct,deleteOrders} = require('../controllers/product')
+const ProductsController = require('../controllers/product')
+const ProductsInstance = new ProductsController()
 
 /**
  * @swagger
@@ -15,7 +13,7 @@ const {buyProduct,findAllProduct,AddToCart,reduceByOne,
  *         description: Success true along with all the products
  * 
  */
-router.get('/',errorHandler(findAllProduct));
+router.get('/',ProductsInstance.errorHandler(ProductsInstance.findAllProduct));
 
 
 /**
@@ -43,7 +41,7 @@ router.get('/',errorHandler(findAllProduct));
  *       200:
  *         description: success:true product has been added successfully
  */
-router.post("/",isloggedin,errorHandler(AddToDatabase));
+router.post("/",ProductsInstance.isloggedin,ProductsInstance.errorHandler(ProductsInstance.AddToDatabase));
 
 /**
  * @swagger
@@ -71,7 +69,7 @@ router.post("/",isloggedin,errorHandler(AddToDatabase));
  *       200:
  *         description: success:true product has been updated successfully
  */
-router.put("/:id",isloggedin,errorHandler(updateProduct));
+router.put("/:id",ProductsInstance.isloggedin,ProductsInstance.errorHandler(ProductsInstance.updateProduct));
 
 /**
  * @swagger
@@ -87,7 +85,7 @@ router.put("/:id",isloggedin,errorHandler(updateProduct));
  *       200:
  *         description: success:true product has been deleted successfully
  */
-router.delete("/:id",isloggedin,errorHandler(deleteProduct));
+router.delete("/:id",ProductsInstance.isloggedin,ProductsInstance.errorHandler(ProductsInstance.deleteProduct));
 
 
 /**
@@ -100,7 +98,7 @@ router.delete("/:id",isloggedin,errorHandler(deleteProduct));
  *         description: Success true along with all the orders has been cleared
  * 
  */
-router.get("/reset-orders",isloggedin,errorHandler(deleteOrders));
+router.get("/reset-orders",ProductsInstance.isloggedin,ProductsInstance.errorHandler(ProductsInstance.deleteOrders));
 
 
 /**
@@ -117,7 +115,7 @@ router.get("/reset-orders",isloggedin,errorHandler(deleteOrders));
  *       200:
  *         description: success:true product has been added successfully
  */
-router.get("/:id/add-to-cart",errorHandler(AddToCart));
+router.get("/:id/add-to-cart",ProductsInstance.errorHandler(ProductsInstance.AddToCart));
 
 
 /**
@@ -147,7 +145,7 @@ router.get("/:id/add-to-cart",errorHandler(AddToCart));
  *         description: success:true Total money added along with total cart balance
  */
 
-router.post("/addMoney",errorHandler(AddMoney));
+router.post("/addMoney",ProductsInstance.errorHandler(ProductsInstance.AddMoney));
 
 
 /**
@@ -164,7 +162,7 @@ router.post("/addMoney",errorHandler(AddMoney));
  *       200:
  *         description: success:true
  */
-router.get("/:id/reduce-by-one",errorHandler(reduceByOne));
+router.get("/:id/reduce-by-one",ProductsInstance.errorHandler(ProductsInstance.reduceByOne));
 
 /**
  * @swagger
@@ -180,7 +178,7 @@ router.get("/:id/reduce-by-one",errorHandler(reduceByOne));
  *       200:
  *         description: success:true
  */
-router.get("/:id/remove-item",errorHandler(removeItem));
+router.get("/:id/remove-item",ProductsInstance.errorHandler(ProductsInstance.removeItem));
 
 
 /**
@@ -192,7 +190,7 @@ router.get("/:id/remove-item",errorHandler(removeItem));
  *       200:
  *         description: success:true with total cents paid is returned
  */
-router.get("/cancel-purchase",errorHandler(cancelPurchase));
+router.get("/cancel-purchase",ProductsInstance.errorHandler(ProductsInstance.cancelPurchase));
 
 
 /**
@@ -204,6 +202,6 @@ router.get("/cancel-purchase",errorHandler(cancelPurchase));
  *       200:
  *         description: success:true with Remaning cents if more money is paid
  */
-router.get('/buy',errorHandler(buyProduct));
+router.get('/buy',ProductsInstance.errorHandler(ProductsInstance.buyProduct));
 
 module.exports = router;

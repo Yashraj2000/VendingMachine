@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const {getLogin,postlogin,getlogout,postregister} = require("../controllers/user");
-const {errorHandler} = require("../middleware")
+const AuthController = require("../controllers/user");
 
+const AuthInstance = new AuthController();
 
 
 // router.get('/login',getLogin);
@@ -27,7 +27,7 @@ const {errorHandler} = require("../middleware")
  *       200:
  *         description: success:true logged in successfully
  */
-router.post('/login', errorHandler(postlogin));
+router.post('/login', AuthInstance.errorHandler(AuthInstance.postlogin));
 
 
 /**
@@ -50,7 +50,7 @@ router.post('/login', errorHandler(postlogin));
  *       200:
  *         description: success:true logged in successfully
  */
-router.post('/register', errorHandler(postregister));
+router.post('/register', AuthInstance.errorHandler(AuthInstance.postregister));
 
 
 /**
@@ -63,7 +63,7 @@ router.post('/register', errorHandler(postregister));
  *         description: Success true logged out successfully
  * 
  */
-router.get('/logout', errorHandler(getlogout));
+router.get('/logout', AuthInstance.errorHandler(AuthInstance.getlogout));
 
 
 
