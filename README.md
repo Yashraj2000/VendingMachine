@@ -13,6 +13,6 @@ VendingMachine Made using Nodejs,express js,Mongodb
 
 - run npm start and app will start running
 
-- Vendors can Add Product to the vending Machine for that they will have to register first will automatically log them in 
+- Vendors can Add Product to the vending Machine for that they will have to register first which will automatically log them in 
 
 - Goto http://localhost:3000/api-docs/  to find the list of all the api endpoints 
