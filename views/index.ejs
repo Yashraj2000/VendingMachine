@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1>Buy the products</h1>
+    <form action="/" method="POST">
+
+      <div><input type="number" name="dimes" id="dimes" placeholder="Enter no of dimes">      </div>
+      <div> <input type="number" name="nickels" id="nickels" placeholder="Enter no of nickels"></div>
+      <div> <input type="number" name="quatars" id="quatars" placeholder="Enter no of quatars"></div>
+      <div> <input type="number" name="pennys" id="pennys" placeholder="Enter no of pennies"></div>
+      <input id="pepsi" name="product" value="pepsi">Pepsi(32)</button>
+      <input id="coke" name="product" value="coke">Coke(25)</button>
+      <input id="soda" name="product" value="soda">soda(47)</button>
+      <button type="submit">buy</button>
+      <div><button  id="cancel">cancel</button></div>
+      <h1 id="total-entered">Total Entered : $<span></span></h1>
+    </form>
+
+    <script src="/javascripts/vending.js"></script>
+  </body>
+</html>
